@@ -6,5 +6,5 @@ import AppKit
 
 public protocol AutoSizeCalculable {
     func setAutoSizingRect(_ rect: CGRect, margins: PEdgeInsets)
-    func autoSizeThatFits(_ size: CGSize, layoutClosure: () -> Void) -> CGSize
+    func autoSizeThatFits(_ size: CGSize, layoutClosure: () -> Void, filter: ((_ isInclude: UIView) -> Bool)?) -> CGSize
 }

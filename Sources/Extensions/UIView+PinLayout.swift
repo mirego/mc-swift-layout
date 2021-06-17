@@ -126,7 +126,7 @@ extension UIView: AutoSizeCalculable {
         self.autoSizingRectWithMargins = Coordinates<View>.adjustRectToDisplayScale(rect.inset(by: margins))
     }
 
-    public func autoSizeThatFits(_ size: CGSize, layoutClosure: () -> Void) -> CGSize {
+    public func autoSizeThatFits(_ size: CGSize, layoutClosure: () -> Void, filter: ((_ isInclude: UIView) -> Bool)? = nil) -> CGSize {
         let isAlreadyAutoSizing = Pin.autoSizingInProgress
 
         if (!isAlreadyAutoSizing) {
@@ -136,7 +136,11 @@ extension UIView: AutoSizeCalculable {
         autoSizingRect = CGRect(origin: CGPoint.zero, size: size)
 
         layoutClosure()
-
+        
+        var subviews = subviews
+        if let filter = filter {
+            subviews = subviews.filter(filter)
+        }
         let boundingRect = subviews.compactMap({ $0.autoSizingRectWithMargins }).reduce(CGRect.zero) { (result: CGRect, autoSizingRect: CGRect) -> CGRect in
             return result.union(autoSizingRect)
         }
