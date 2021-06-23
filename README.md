@@ -548,7 +548,7 @@ All PinLayout's relative methods can accept an array of Views (ex: `below(of: [U
 You can define your own filter methods, but PinLayout has a filter method called `visible` that can be used to layout a view related to only visible views. This can be really useful when some views may be visible or hidden depending on the situation.
 
 ```swift
-   view.pin.below(of: visibles([ageSwitch, ageField])).horizontally().
+   view.pin.below(of: visible([ageSwitch, ageField])).horizontally().
 ``` 
 
 Note that the **Form** example use this filter method, see [Examples App](#examples_app).
